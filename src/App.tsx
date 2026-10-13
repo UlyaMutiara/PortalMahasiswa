@@ -1,34 +1,34 @@
 import type { Mahasiswa } from './types';
+import { bungkusData } from './utils';
 
 function App() {
-  const dataMahasiswa: Mahasiswa[] = [
-    {
-      id: 1,
-      nama: 'Budi Santoso',
-      nim: '12345678',
-      jurusan: 'Teknik Informatika',
-      status: 'Aktif',
-    },
-    {
-      id: 2,
-      nama: 'Siti Aminah',
-      nim: '87654321',
-      jurusan: 'Sistem Informasi',
-      status: 'Cuti',
-    },
-  ];
+  // Data mahasiswa tunggal untuk diuji dengan fungsi generic
+  const dataMhs: Mahasiswa = {
+    id: 1,
+    nama: 'Budi Santoso',
+    nim: '12345678',
+    jurusan: 'Teknik Informatika',
+    status: 'Aktif',
+  };
+
+  // Memanggil fungsi generic bungkusData dengan tipe Mahasiswa
+  const hasilGeneric = bungkusData<Mahasiswa>(dataMhs, 'Data Mahasiswa Berhasil Dimuat Menggunakan Generic!');
 
   return (
     <div style={{ padding: '20px', fontFamily: 'sans-serif' }}>
-      <h1>Daftar Mahasiswa</h1>
-      <ul>
-        {dataMahasiswa.map((mhs) => (
-          <li key={mhs.id}>
-            <strong>{mhs.nama}</strong> ({mhs.nim}) - {mhs.jurusan} | Status:{' '}
-            <em>{mhs.status}</em>
-          </li>
-        ))}
-      </ul>
+      <h1>Tugas Praktikum - Langkah 03</h1>
+      <h2>Implementasi Fungsi Generic</h2>
+      
+      <div style={{ border: '1px solid #ccc', padding: '15px', borderRadius: '8px', maxWidth: '450px', marginTop: '15px' }}>
+        <p><strong>Pesan:</strong> {hasilGeneric.pesan}</p>
+        <p><strong>Waktu:</strong> {hasilGeneric.waktu}</p>
+        <hr />
+        <h3>Payload Data Mahasiswa:</h3>
+        <p><strong>Nama:</strong> {hasilGeneric.payload.nama}</p>
+        <p><strong>NIM:</strong> {hasilGeneric.payload.nim}</p>
+        <p><strong>Jurusan:</strong> {hasilGeneric.payload.jurusan}</p>
+        <p><strong>Status:</strong> <em>{hasilGeneric.payload.status}</em></p>
+      </div>
     </div>
   );
 }
